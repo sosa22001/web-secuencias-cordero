@@ -75,6 +75,20 @@ const Index = () => {
     }
   };
 
+  // **Agrega esta función para limpiar el título**
+  const cleanTitle = (track) => {
+    if (!track) return "";
+    return track.title.split("_").slice(0, -1).join(" ");
+  };
+
+  // **Crea un nuevo objeto con el título limpio para el reproductor**
+  const trackForPlayer = currentTrack
+    ? {
+        ...currentTrack,
+        title: cleanTitle(currentTrack),
+      }
+    : null;
+
   const renderActiveSection = () => {
     switch (activeSection) {
       case "sequences":
@@ -123,11 +137,11 @@ const Index = () => {
                 {renderActiveSection()}     {" "}
       </main>
            {" "}
-      {activeSection === "sequences" && currentTrack && (
+      {activeSection === "sequences" && trackForPlayer && (
         <div className="fixed bottom-16 left-0 right-0 z-40 px-4">
                    {" "}
           <MusicPlayer
-            currentTrack={currentTrack}
+            currentTrack={trackForPlayer} // Usa el nuevo objeto con el título limpio
             isPlaying={isPlaying}
             onPlayPause={handlePlayPause}
             onNext={handleNext}
