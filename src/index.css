@@ -1,0 +1,212 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Music App Design System - Soft gradients and modern colors */
+
+@layer base {
+  :root {
+    /* Main backgrounds with soft gradients */
+    --background: 245 25% 97%;
+    --foreground: 240 15% 15%;
+
+    /* Card system with elevated feel */
+    --card: 0 0% 100%;
+    --card-foreground: 240 15% 15%;
+
+    /* Popover styling */
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 15% 15%;
+
+    /* Primary brand colors - musical purple-blue gradient */
+    --primary: 260 85% 65%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 280 70% 75%;
+
+    /* Secondary soft accent */
+    --secondary: 245 30% 92%;
+    --secondary-foreground: 240 15% 25%;
+
+    /* Muted elements */
+    --muted: 245 20% 94%;
+    --muted-foreground: 240 10% 55%;
+
+    /* Accent colors for highlights */
+    --accent: 320 50% 88%;
+    --accent-foreground: 320 70% 25%;
+
+    /* Status colors */
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 142 70% 50%;
+    --warning: 38 92% 55%;
+
+    /* Border and input styling */
+    --border: 245 25% 88%;
+    --input: 245 25% 90%;
+    --ring: 260 85% 65%;
+
+    /* Layout properties */
+    --radius: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+
+    /* Music app specific gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(245 25% 97%));
+    --gradient-subtle: linear-gradient(180deg, hsl(245 25% 97%), hsl(245 20% 94%));
+    
+    /* Shadows for depth */
+    --shadow-soft: 0 4px 20px -4px hsl(var(--primary) / 0.1);
+    --shadow-medium: 0 8px 30px -6px hsl(var(--primary) / 0.15);
+    --shadow-card: 0 2px 12px -2px hsl(240 15% 15% / 0.08);
+
+    /* Animation timings */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark mode with deep music vibes */
+    --background: 240 15% 8%;
+    --foreground: 245 25% 95%;
+
+    --card: 240 15% 10%;
+    --card-foreground: 245 25% 95%;
+
+    --popover: 240 15% 10%;
+    --popover-foreground: 245 25% 95%;
+
+    --primary: 280 70% 75%;
+    --primary-foreground: 240 15% 8%;
+    --primary-glow: 260 85% 65%;
+
+    --secondary: 240 15% 15%;
+    --secondary-foreground: 245 25% 90%;
+
+    --muted: 240 15% 12%;
+    --muted-foreground: 240 10% 65%;
+
+    --accent: 320 50% 70%;
+    --accent-foreground: 240 15% 8%;
+
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 245 25% 95%;
+
+    --border: 240 15% 18%;
+    --input: 240 15% 15%;
+    --ring: 280 70% 75%;
+
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-card: linear-gradient(145deg, hsl(240 15% 12%), hsl(240 15% 8%));
+    --gradient-subtle: linear-gradient(180deg, hsl(240 15% 8%), hsl(240 15% 6%));
+    
+    --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
+    --shadow-medium: 0 8px 30px -6px hsl(0 0% 0% / 0.4);
+    --shadow-card: 0 2px 12px -2px hsl(0 0% 0% / 0.2);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background: var(--gradient-subtle);
+    min-height: 100vh;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    @apply rounded-full;
+  }
+}
+
+@layer components {
+  /* Music player specific components */
+  .music-card {
+    @apply relative overflow-hidden rounded-xl p-4 transition-all duration-300;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .music-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-md border border-white/20;
+    background: hsl(var(--card) / 0.8);
+  }
+
+  /* Navigation animations */
+  .nav-item {
+    @apply relative flex items-center justify-center p-3 rounded-xl transition-all duration-300;
+  }
+
+  .nav-item.active {
+    background: var(--gradient-primary);
+    @apply text-primary-foreground shadow-lg;
+  }
+
+  .nav-item:not(.active) {
+    @apply text-muted-foreground hover:text-foreground hover:bg-muted;
+  }
+
+  /* Button variants */
+  .btn-play {
+    @apply relative overflow-hidden rounded-full p-3 transition-all duration-300;
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .btn-play:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-medium);
+  }
+
+  .btn-play:active {
+    transform: scale(0.98);
+  }
+}
