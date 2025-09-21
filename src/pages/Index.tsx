@@ -33,8 +33,8 @@ const Index = () => {
 
   const handleTrackSelect = (track) => {
     setCurrentTrack(track);
-    setIsPlaying(true);
-    const index = mockTracks.findIndex((t) => t.id === track.id);
+    setIsPlaying(true); // Usa canciones para encontrar el índice, no mockTracks
+    const index = canciones.findIndex((t) => t.url === track.url);
     setCurrentTrackIndex(index);
   };
 
@@ -43,17 +43,21 @@ const Index = () => {
   };
 
   const handleNext = () => {
-    const nextIndex = (currentTrackIndex + 1) % mockTracks.length;
+    // Asegúrate de que canciones no es null y tiene elementos
+    if (!canciones || canciones.length === 0) return;
+    const nextIndex = (currentTrackIndex + 1) % canciones.length;
     setCurrentTrackIndex(nextIndex);
-    setCurrentTrack(mockTracks[nextIndex]);
+    setCurrentTrack(canciones[nextIndex]);
     setIsPlaying(true);
   };
 
   const handlePrevious = () => {
+    // Asegúrate de que canciones no es null y tiene elementos
+    if (!canciones || canciones.length === 0) return;
     const prevIndex =
-      currentTrackIndex === 0 ? mockTracks.length - 1 : currentTrackIndex - 1;
+      currentTrackIndex === 0 ? canciones.length - 1 : currentTrackIndex - 1;
     setCurrentTrackIndex(prevIndex);
-    setCurrentTrack(mockTracks[prevIndex]);
+    setCurrentTrack(canciones[prevIndex]);
     setIsPlaying(true);
   };
 
@@ -71,12 +75,14 @@ const Index = () => {
       case "sequences":
         return (
           <div className="w-full max-w-lg mx-auto p-4 space-y-6 pb-60">
+                       {" "}
             <SequencesSection
               tracks={canciones}
               currentTrack={currentTrack}
               isPlaying={isPlaying}
               onTrackSelect={handleTrackSelect}
             />
+                     {" "}
           </div>
         );
       case "schedule":
@@ -95,14 +101,14 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-subtle flex flex-col bg-orange-800">
-      {/* Main Content con espacio inferior para el reproductor */}
+           {" "}
       <main className="animate-fade-in flex-1 overflow-y-auto">
-        {renderActiveSection()}
+                {renderActiveSection()}     {" "}
       </main>
-
-      {/* Music Player solo se muestra en la sección de Secuencias */}
+           {" "}
       {activeSection === "sequences" && currentTrack && (
         <div className="fixed bottom-16 left-0 right-0 z-40 px-4">
+                   {" "}
           <MusicPlayer
             currentTrack={currentTrack}
             isPlaying={isPlaying}
@@ -110,14 +116,15 @@ const Index = () => {
             onNext={handleNext}
             onPrevious={handlePrevious}
           />
+                 {" "}
         </div>
       )}
-
-      {/* Bottom Navigation */}
+           {" "}
       <MobileNavigation
         activeSection={activeSection}
         onSectionChange={setActiveSection}
       />
+         {" "}
     </div>
   );
 };
