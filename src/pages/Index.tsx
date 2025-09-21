@@ -70,12 +70,14 @@ const Index = () => {
     switch (activeSection) {
       case "sequences":
         return (
-          <SequencesSection
-            tracks={canciones}
-            currentTrack={currentTrack}
-            isPlaying={isPlaying}
-            onTrackSelect={handleTrackSelect}
-          />
+          <div className="w-full max-w-lg mx-auto p-4 space-y-6 pb-60">
+            <SequencesSection
+              tracks={canciones}
+              currentTrack={currentTrack}
+              isPlaying={isPlaying}
+              onTrackSelect={handleTrackSelect}
+            />
+          </div>
         );
       case "schedule":
         return (
@@ -92,9 +94,9 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-subtle flex flex-col">
+    <div className="min-h-screen bg-gradient-subtle flex flex-col bg-orange-800">
       {/* Main Content con espacio inferior para el reproductor */}
-      <main className="animate-fade-in flex-1 overflow-y-auto pb-48">
+      <main className="animate-fade-in flex-1 overflow-y-auto">
         {renderActiveSection()}
       </main>
 

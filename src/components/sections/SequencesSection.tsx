@@ -31,17 +31,16 @@ export const SequencesSection = ({
   }
 
   return (
-    <div className="w-full max-w-lg mx-auto p-4 space-y-6 pb-60">
+    <>
       <h2 className="text-lg font-semibold">Todas las Secuencias</h2>
 
       <div className="grid gap-3">
         {tracks.map((track) => {
           const cleanTitle = track.title.split("_").slice(0, -1).join(" ");
-
           return (
             <div
               key={track.url}
-              className="flex items-center space-x-3 p-3 rounded-xl bg-card/50 hover:bg-card transition-colors cursor-pointer group"
+              className="flex items-center space-x-3 p-3 rounded-xl bg-card/50 hover:bg-card transition-colors cursor-pointer group w-full"
               onClick={() => onTrackSelect(track)}
             >
               <div className="w-12 h-12 bg-gray-300 rounded-lg flex items-center justify-center text-white font-bold">
@@ -67,6 +66,6 @@ export const SequencesSection = ({
           );
         })}
       </div>
-    </div>
+    </>
   );
 };
