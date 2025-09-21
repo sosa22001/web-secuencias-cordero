@@ -15,6 +15,7 @@ const Index = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [canciones, setCanciones] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const cargarCanciones = async () => {
@@ -29,11 +30,17 @@ const Index = () => {
     };
 
     cargarCanciones();
-  }, []);
+  }, []); // Lógica de filtrado
+
+  const filteredCanciones = canciones
+    ? canciones.filter((track) =>
+        track.title.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : null;
 
   const handleTrackSelect = (track) => {
     setCurrentTrack(track);
-    setIsPlaying(true); // Usa canciones para encontrar el índice, no mockTracks
+    setIsPlaying(true);
     const index = canciones.findIndex((t) => t.url === track.url);
     setCurrentTrackIndex(index);
   };
@@ -43,7 +50,6 @@ const Index = () => {
   };
 
   const handleNext = () => {
-    // Asegúrate de que canciones no es null y tiene elementos
     if (!canciones || canciones.length === 0) return;
     const nextIndex = (currentTrackIndex + 1) % canciones.length;
     setCurrentTrackIndex(nextIndex);
@@ -52,7 +58,6 @@ const Index = () => {
   };
 
   const handlePrevious = () => {
-    // Asegúrate de que canciones no es null y tiene elementos
     if (!canciones || canciones.length === 0) return;
     const prevIndex =
       currentTrackIndex === 0 ? canciones.length - 1 : currentTrackIndex - 1;
@@ -76,8 +81,20 @@ const Index = () => {
         return (
           <div className="w-full max-w-lg mx-auto p-4 space-y-6 pb-60">
                        {" "}
+            <div className="mb-4">
+                           {" "}
+              <input
+                type="text"
+                placeholder="Buscar canciones..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full p-3 rounded-xl bg-card/70 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 placeholder:text-gray-500"
+              />
+                         {" "}
+            </div>
+                       {" "}
             <SequencesSection
-              tracks={canciones}
+              tracks={filteredCanciones}
               currentTrack={currentTrack}
               isPlaying={isPlaying}
               onTrackSelect={handleTrackSelect}
