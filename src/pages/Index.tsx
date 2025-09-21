@@ -19,10 +19,10 @@ const Index = () => {
   useEffect(() => {
     const cargarCanciones = async () => {
       try {
-        const data = await obtenerTodasLaseSecuencias(); // llama al endpoint /api/secuencias
+        const data = await obtenerTodasLaseSecuencias();
         console.log(data);
         setCanciones(data);
-        if (data.length > 0) setCurrentTrack(data[0]); // opcional: seleccionar la primera canción
+        if (data.length > 0) setCurrentTrack(data[0]);
       } catch (error) {
         console.error("Error cargando canciones:", error);
       }
@@ -92,19 +92,23 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-subtle">
-      {/* Main Content */}
-      <main className="animate-fade-in">{renderActiveSection()}</main>
+    <div className="min-h-screen bg-gradient-subtle flex flex-col">
+      {/* Main Content con espacio inferior para el reproductor */}
+      <main className="animate-fade-in flex-1 overflow-y-auto pb-48">
+        {renderActiveSection()}
+      </main>
 
-      {/* Music Player */}
-      {currentTrack && (
-        <MusicPlayer
-          currentTrack={currentTrack}
-          isPlaying={isPlaying}
-          onPlayPause={handlePlayPause}
-          onNext={handleNext}
-          onPrevious={handlePrevious}
-        />
+      {/* Music Player solo se muestra en la sección de Secuencias */}
+      {activeSection === "sequences" && currentTrack && (
+        <div className="fixed bottom-16 left-0 right-0 z-40 px-4">
+          <MusicPlayer
+            currentTrack={currentTrack}
+            isPlaying={isPlaying}
+            onPlayPause={handlePlayPause}
+            onNext={handleNext}
+            onPrevious={handlePrevious}
+          />
+        </div>
       )}
 
       {/* Bottom Navigation */}

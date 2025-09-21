@@ -82,7 +82,7 @@ export const MusicPlayer = ({
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <div className="fixed bottom-16 left-0 right-0 z-40 mx-4 mb-2">
+    <div className="fixed bottom-16 left-0 right-0 z-40 mx-4 mb-2 w-screen mr-5 border-l-indigo-950">
       <div className="music-card p-4 animate-slide-up">
         {/* Track Info */}
         <div className="flex items-center space-x-3 mb-3">
