@@ -37,10 +37,8 @@ export const SequencesSection = ({
 
       <div className="grid gap-3">
         {tracks.map((track) => {
-          // Limpiamos el título para quitar el sufijo
-          const cleanTitle = track.title.includes("_")
-            ? track.title.split("_")[0]
-            : track.title;
+          // Quitamos el último sufijo y reemplazamos "_" por espacio
+          const cleanTitle = track.title.split("_").slice(0, -1).join(" ");
 
           return (
             <div
@@ -48,7 +46,7 @@ export const SequencesSection = ({
               className="flex items-center space-x-3 p-3 rounded-xl bg-card/50 hover:bg-card transition-colors cursor-pointer group"
               onClick={() => onTrackSelect(track)}
             >
-              {/* Placeholder de ícono si no hay cover */}
+              {/* Placeholder de ícono */}
               <div className="w-12 h-12 bg-gray-300 rounded-lg flex items-center justify-center text-white font-bold">
                 🎵
               </div>
